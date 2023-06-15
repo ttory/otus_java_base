@@ -72,7 +72,7 @@ public class Animal {
         String currAgeType;
         if (age == 1) {
             currAgeType = "год";
-        } else if (age < 5) {
+        } else if (age > 1 && age < 5) {
             currAgeType = "года";
         } else {
             currAgeType = "лет";
