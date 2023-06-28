@@ -6,7 +6,7 @@
 
 package ru.homework.animals;
 
-public class Animal {
+public abstract class Animal {
     private String name;
     private int age;
     private float weight;
@@ -70,9 +70,11 @@ public class Animal {
     @Override
     public String toString() {
         String currAgeType;
+        String strAge = Integer.toString(age);
         if (age == 1) {
             currAgeType = "год";
-        } else if (age > 1 && age < 5) {
+        } else if ((!strAge.endsWith("13") || !strAge.endsWith("12"))
+                && (strAge.endsWith("3") || strAge.endsWith("2"))) {
             currAgeType = "года";
         } else {
             currAgeType = "лет";

@@ -22,28 +22,33 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         while (true) {
+
             System.out.println("Введите одну из команд: add/list/exit:");
             String command = scanner.next().trim().toUpperCase();
-
+            boolean isComExist = false;
             for (Commands commands : Commands.values()) {
                 if (commands.name().equals(command)) {
+                    isComExist = true;
                     switch (commands) {
                         case ADD:
-                            Animal newAnimal;
-                            boolean result = true;
-                            System.out.println("Введите тип животного: cat/dog/duck:");
-                            String type = scanner.next().trim().toLowerCase();
-                            if (type.equals("cat")) {
-                                newAnimal = new Cat();
-                            } else if (type.equals("dog")) {
-                                newAnimal = new Dog();
-                            } else if (type.equals("duck")) {
-                                newAnimal = new Duck();
-                            } else {
-                                System.out.println("Выбран несуществующий тип животного");
-                                break;
-                            }
-
+                            Animal newAnimal = null;
+                            boolean result;
+                            do {
+                                result = false;
+                                System.out.println("Введите тип животного: cat/dog/duck:");
+                                String type = scanner.next().trim().toLowerCase();
+                                if (type.equals("cat")) {
+                                    newAnimal = new Cat();
+                                } else if (type.equals("dog")) {
+                                    newAnimal = new Dog();
+                                } else if (type.equals("duck")) {
+                                    newAnimal = new Duck();
+                                } else {
+                                    System.out.println("Выбран несуществующий тип животного");
+                                    result = true;
+                                }
+                            } while (result);
+                            result = true;
                             System.out.println("Введите имя животного:");
                             newAnimal.setName(scanner.next().trim());
 
@@ -83,11 +88,15 @@ public class Main {
                             }
                             break;
                         case EXIT:
-                            return;
+                            System.exit(0);
                     }
+
                     break;
                 }
 
+            }
+            if (!isComExist) {
+                System.out.println("Команда не найдена");
             }
         }
     }
